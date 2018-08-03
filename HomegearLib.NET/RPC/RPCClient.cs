@@ -311,7 +311,7 @@ namespace HomegearLib.RPC
                                 byte[] packet = _binaryRpc.Data;
                                 _binaryRpc.Reset();
                                 System.Diagnostics.Debug.WriteLine("Packet received " + BitConverter.ToString(packet));
-                                _eventQueue.Enque(packet);
+                                _eventQueue?.Enque(packet);
                             }
                         }
                     }

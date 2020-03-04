@@ -58,6 +58,7 @@ namespace HomegearLib.RPC
         private readonly string _hostname;
         private readonly int _port;
 
+        public string GetHostName() => _hostname;
         public bool Ssl { get; } = false;
 
         private SecureString _authString = null;

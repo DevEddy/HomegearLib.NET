@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using System.Security.Authentication;
 
@@ -1436,7 +1435,7 @@ namespace HomegearLib.RPC
                 }
 
                 ServiceMessage message;
-                if(serviceMessageType == ServiceMessage.ServiceMessageType.global)
+                if (serviceMessageType == ServiceMessage.ServiceMessageType.global)
                 {
                     long value;
                     if (element.StructValue["VALUE"].Type == RPCVariableType.rpcBoolean)

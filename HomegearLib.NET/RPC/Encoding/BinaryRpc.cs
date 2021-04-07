@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace HomegearLib.RPC.Encoding
 {
@@ -22,7 +21,7 @@ namespace HomegearLib.RPC.Encoding
         public bool IsFinished { get; private set; }
 
         private List<byte> _data = new List<byte>(1024);
-        public byte[] Data { get { return _data.ToArray();  } }
+        public byte[] Data { get { return _data.ToArray(); } }
 
         public void Reset()
         {
@@ -41,14 +40,14 @@ namespace HomegearLib.RPC.Encoding
             int sizeToInsert = 0;
             if (bufferLength == 0 || IsFinished) return 0;
             ProcessingStarted = true;
-            if(_data.Count + bufferLength < 8)
+            if (_data.Count + bufferLength < 8)
             {
                 byte[] subArray = new byte[bufferLength];
                 Array.Copy(buffer, bufferPos, subArray, 0, bufferLength);
                 _data.AddRange(subArray);
                 return initialBufferLength;
             }
-            else if(_data.Count < 8)
+            else if (_data.Count < 8)
             {
                 sizeToInsert = 8 - _data.Count;
                 byte[] subArray = new byte[sizeToInsert];
@@ -57,13 +56,13 @@ namespace HomegearLib.RPC.Encoding
                 bufferPos += sizeToInsert;
                 bufferLength -= sizeToInsert;
             }
-            if(_data[0] != 'B' || _data[1] != 'i' || _data[2] != 'n')
+            if (_data[0] != 'B' || _data[1] != 'i' || _data[2] != 'n')
             {
                 IsFinished = true;
                 throw new HomegearBinaryRpcException("Packet does not start with \"Bin\".");
             }
             RpcType = ((_data[3] & 1) == 1) ? BinaryRpcType.response : BinaryRpcType.request;
-            if(_data[3] == 0x40 || _data[3] == 0x41)
+            if (_data[3] == 0x40 || _data[3] == 0x41)
             {
                 HasHeader = true;
                 _headerSize = (_data[4] << 24) | (_data[5] << 16) | (_data[6] << 8) | _data[7];
@@ -74,7 +73,7 @@ namespace HomegearLib.RPC.Encoding
                 _dataSize = (_data[4] << 24) | (_data[5] << 16) | (_data[6] << 8) | _data[7];
                 if (_dataSize > 104857600) throw new HomegearBinaryRpcException("Header is larger than 100 MiB.");
             }
-            if(_dataSize == 0 && _headerSize == 0)
+            if (_dataSize == 0 && _headerSize == 0)
             {
                 IsFinished = true;
                 throw new HomegearBinaryRpcException("Invalid packet format.");

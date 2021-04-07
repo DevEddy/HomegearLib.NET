@@ -216,7 +216,7 @@ namespace HomegearLib.RPC
                     }
                     catch (AggregateException aggrEx)
                     {
-                        if(aggrEx.InnerException is AuthenticationException authEx)
+                        if (aggrEx.InnerException is AuthenticationException authEx)
                         {
                             _client.Close();
                             _connecting = false;

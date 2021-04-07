@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HomegearLib.RPC.Encoding
+﻿namespace HomegearLib.RPC.Encoding
 {
     internal class RPCHeader
     {

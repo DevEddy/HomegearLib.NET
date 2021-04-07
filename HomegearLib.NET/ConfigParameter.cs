@@ -1,5 +1,4 @@
 ﻿using HomegearLib.RPC;
-using System;
 
 namespace HomegearLib
 {

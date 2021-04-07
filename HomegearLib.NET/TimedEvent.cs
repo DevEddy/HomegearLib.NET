@@ -1,6 +1,6 @@
-﻿using System;
+﻿using HomegearLib.RPC;
+using System;
 using System.Collections.Generic;
-using HomegearLib.RPC;
 
 namespace HomegearLib
 {
